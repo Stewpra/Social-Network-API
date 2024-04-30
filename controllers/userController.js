@@ -60,6 +60,19 @@ const updateUser = async (req, res) => {
 };
 
 // Delete user
+const deleteUser = async (req, res) => {
+  try {
+    const deletedUser = await User.findOneAndDelete({ _id: req.params.userId });
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    res.json({ message: 'User has been deleted' });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // Add friend
 
@@ -70,7 +83,7 @@ module.exports = {
   getUserById,
   createUser,
   updateUser,
-  // deleteUser,
+  deleteUser,
   // addFriend,
   // removeFriend,
 };
