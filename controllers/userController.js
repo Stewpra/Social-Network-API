@@ -12,9 +12,17 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-// Get user by id
-
 // Create user
+const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create(req.body);
+    res.json(newUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+// Get user by id
 
 // Update user
 
@@ -27,7 +35,7 @@ const getAllUsers = async (req, res) => {
 module.exports = {
   getAllUsers,
   // getUserById,
-  // createUser,
+  createUser,
   // updateUser,
   // deleteUser,
   // addFriend,
