@@ -16,11 +16,11 @@ const User = require('../models/User');
 // Remove friend
 
 module.exports = {
-  getAllUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
-  addFriend,
-  removeFriend,
+  // getAllUsers,
+  // getUserById,
+  // createUser,
+  // updateUser,
+  // deleteUser,
+  // addFriend,
+  // removeFriend,
 };
