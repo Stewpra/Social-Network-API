@@ -1,5 +1,5 @@
 // Import all models
-const Thought = require('.Thought');
+const Thought = require('./Thought');
 const User = require('./User');
 
 // Export all models
