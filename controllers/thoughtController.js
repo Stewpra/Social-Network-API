@@ -50,6 +50,23 @@ const createThought = async (req, res) => {
 };
 
 // Update thought
+const updateThought = async (req, res) => {
+  try {
+    const updatedThought = await Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    );
+
+    if (!updatedThought) {
+      return res.status(404).json({ message: 'No thought found with that ID' });
+    }
+
+    res.json(updatedThought);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // Delete thought
 
@@ -61,7 +78,7 @@ module.exports = {
   getAllThoughts,
   getThoughtById,
   createThought,
-  // updateThought,
+  updateThought,
   // deleteThought,
   // addReaction,
   // removeReaction,
