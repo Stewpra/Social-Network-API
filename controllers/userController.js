@@ -94,6 +94,23 @@ const addFriend = async (req, res) => {
 };
 
 // Remove friend
+const removeFriend = async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 module.exports = {
   getAllUsers,
@@ -102,5 +119,5 @@ module.exports = {
   updateUser,
   deleteUser,
   addFriend,
-  // removeFriend,
+  removeFriend,
 };
