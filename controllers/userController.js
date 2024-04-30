@@ -41,6 +41,23 @@ const getUserById = async (req, res) => {
 };
 
 // Update user
+const updateUser = async (req, res) => {
+  try {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.params.userId },
+      { $set: req.body },
+      { runValidators: true, new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json();
+    }
+
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // Delete user
 
@@ -52,7 +69,7 @@ module.exports = {
   getAllUsers,
   getUserById,
   createUser,
-  // updateUser,
+  updateUser,
   // deleteUser,
   // addFriend,
   // removeFriend,
