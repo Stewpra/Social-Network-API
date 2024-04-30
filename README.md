@@ -66,7 +66,7 @@ Use the following guidelines to set up your models and API routes:
 
 **User**:
 
-- `username`
+- `userName`
 
   - String
   - Unique
@@ -107,7 +107,7 @@ Create a virtual called `friendCount` that retrieves the length of the user's `f
   - Set default value to the current timestamp
   - Use a getter method to format the timestamp on query
 
-- `username` (The user that created this thought)
+- `userName` (The user that created this thought)
 
   - String
   - Required
@@ -134,7 +134,7 @@ Create a virtual called `reactionCount` that retrieves the length of the thought
   - Required
   - 280 character maximum
 
-- `username`
+- `userName`
 
   - String
   - Required
@@ -161,7 +161,7 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 ```json
 // example data
 {
-  "username": "lernantino",
+  "userName": "lernantino",
   "email": "lernantino@gmail.com"
 }
 ```
@@ -194,7 +194,7 @@ This will not be a model, but rather will be used as the `reaction` field's subd
 // example data
 {
   "thoughtText": "Here's a cool thought...",
-  "username": "lernantino",
+  "userName": "lernantino",
   "userId": "5edff358a0fcb779aa7b118b"
 }
 ```
