@@ -86,6 +86,23 @@ const deleteThought = async (req, res) => {
 };
 
 // Add reaction
+const addReaction = async (req, res) => {
+  try {
+    const updatedThought = await Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $addToSet: { reactions: req.body } },
+      { runValidators: true, new: true }
+    );
+
+    if (!updatedThought) {
+      return res.status(404).json({ message: 'No thought found with that ID' });
+    }
+
+    res.json(updatedThought);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // Remove reaction
 
@@ -95,6 +112,6 @@ module.exports = {
   createThought,
   updateThought,
   deleteThought,
-  // addReaction,
+  addReaction,
   // removeReaction,
 };
