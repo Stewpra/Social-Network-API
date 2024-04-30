@@ -23,6 +23,22 @@ const createUser = async (req, res) => {
 };
 
 // Get user by id
+const getUserById = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.userId })
+      .populate('thoughts')
+      .populate('friends')
+      .select('-__v');
+
+    if (!user) {
+      return res.status(404).json({ message: 'No user with that ID' });
+    }
+
+    res.json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
 
 // Update user
 
@@ -34,7 +50,7 @@ const createUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  // getUserById,
+  getUserById,
   createUser,
   // updateUser,
   // deleteUser,
