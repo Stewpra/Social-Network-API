@@ -34,7 +34,7 @@ const createThought = async (req, res) => {
     const newThought = await Thought.create(req.body);
 
     const updatedUser = await User.findOneAndUpdate(
-      { username: req.body.username },
+      { userName: req.body.userName },
       { $addToSet: { thoughts: newThought._id } },
       { new: true }
     );

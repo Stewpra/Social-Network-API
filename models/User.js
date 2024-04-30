@@ -2,7 +2,7 @@ const { Schema, Types, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    username: {
+    userName: {
       type: String,
       unique: true,
       required: true,
@@ -12,12 +12,7 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
-      validate: {
-        validator: function (v) {
-          return /^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(v);
-        },
-        message: (props) => `${props.value} is not a valid email address!`,
-      },
+      match: [/.+@.+\..+/],
     },
     thoughts: [
       {
@@ -40,7 +35,9 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.virtual('friendCount').get(() => this.friends.length);
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+});
 
 const User = model('User', userSchema);
 
